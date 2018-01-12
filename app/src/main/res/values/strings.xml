@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">OMDb Client</string>
+    <string name="title_add_movie">Adicionar filme</string>
+    <string name="label_title">Título</string>
+    <string name="action_add">Adicionar</string>
+    <string name="msg_empty_input_error">Este campo deve ser preenchido!</string>
 </resources>
