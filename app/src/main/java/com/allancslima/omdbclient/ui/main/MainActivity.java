@@ -17,11 +17,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         FloatingActionButton btnAddMovie = findViewById(R.id.button_add_movie);
-        btnAddMovie.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, AddMovieActivity.class));
-            }
-        });
+        btnAddMovie.setOnClickListener( (View v) ->
+                startActivity(new Intent(MainActivity.this, AddMovieActivity.class)) );
     }
 }

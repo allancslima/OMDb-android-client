@@ -2,7 +2,7 @@ package com.allancslima.omdbclient.data.network;
 
 import com.allancslima.omdbclient.data.network.model.MovieResponse;
 
-import retrofit2.Call;
+import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
@@ -15,5 +15,5 @@ public interface OMDbService {
     String BASE_URL = "http://www.omdbapi.com";
 
     @GET("/?apiKey=9ffa6686")
-    Call<MovieResponse> getMovie(@Query("t") String title);
+    Observable<MovieResponse> getMovie(@Query("t") String title);
 }

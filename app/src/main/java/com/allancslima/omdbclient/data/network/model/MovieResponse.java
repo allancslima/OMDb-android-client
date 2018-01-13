@@ -1,5 +1,6 @@
 package com.allancslima.omdbclient.data.network.model;
 
+import com.allancslima.omdbclient.data.db.model.Movie;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -56,5 +57,14 @@ public class MovieResponse {
 
     public void setResponse(boolean response) {
         this.response = response;
+    }
+
+    public Movie getMovie() {
+        Movie movie = new Movie();
+        movie.setTitle(getTitle());
+        movie.setYear(getYear());
+        movie.setGenre(getGenre());
+
+        return movie;
     }
 }

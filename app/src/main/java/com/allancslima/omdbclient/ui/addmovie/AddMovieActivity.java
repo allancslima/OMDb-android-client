@@ -19,6 +19,7 @@ public class AddMovieActivity extends AppCompatActivity implements AddMovieMVP.V
 
     private TextInputLayout editTitleWrapper;
     private TextInputEditText editTitle;
+    AppCompatButton buttonAdd;
     private AddMovieMVP.Presenter mPresenter;
 
     @Override
@@ -35,13 +36,9 @@ public class AddMovieActivity extends AppCompatActivity implements AddMovieMVP.V
         editTitleWrapper = findViewById(R.id.edit_title_wrapper);
         editTitle = findViewById(R.id.edit_title);
 
-        AppCompatButton buttonAdd = findViewById(R.id.button_add);
-        buttonAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mPresenter.addMovie(editTitle.getText().toString());
-            }
-        });
+        buttonAdd = findViewById(R.id.button_add);
+        buttonAdd.setOnClickListener( (View v) -> mPresenter
+                .addMovie( editTitle.getText().toString() ) );
     }
 
     @Override
@@ -63,6 +60,11 @@ public class AddMovieActivity extends AppCompatActivity implements AddMovieMVP.V
     public void setEmptyTitleInputError() {
         editTitleWrapper.setErrorEnabled(true);
         editTitleWrapper.setError( getResources().getString(R.string.msg_empty_input_error) );
+    }
+
+    @Override
+    public void setEnabledAddButton(boolean enabled) {
+        buttonAdd.setEnabled(enabled);
     }
 
     @Override
