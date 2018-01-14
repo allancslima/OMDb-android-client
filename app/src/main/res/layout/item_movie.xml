@@ -12,8 +12,9 @@
         <ImageView
             android:id="@+id/image_poster"
             android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:background="#EEE" />
+            android:layout_height="180dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/poster_justice_league" />
 
         <TextView
             android:id="@+id/text_title"
@@ -23,7 +24,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:text="Star Wars VIII - The Last Jedi"
+            android:text="Justice League"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
         <TextView

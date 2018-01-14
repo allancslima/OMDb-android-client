@@ -1,6 +1,7 @@
 package com.allancslima.omdbclient.ui.main;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import com.allancslima.omdbclient.R;
 import com.allancslima.omdbclient.base.BaseAdapter;
 import com.allancslima.omdbclient.data.db.model.Movie;
+import com.allancslima.omdbclient.ui.moviedetails.MovieDetailsActivity;
 
 import java.util.List;
 
@@ -29,7 +31,8 @@ public class MovieAdapter extends BaseAdapter {
         MovieViewHolder holder = new MovieViewHolder(view);
 
         view.setOnClickListener((View v) -> {
-
+            Intent intent = new Intent(mContext, MovieDetailsActivity.class);
+            mContext.startActivity(intent);
         });
 
         return holder;
