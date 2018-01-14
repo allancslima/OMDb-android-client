@@ -1,7 +1,9 @@
 package com.allancslima.omdbclient.ui.newmovie;
 
-import android.content.Context;
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 
+import com.allancslima.omdbclient.R;
 import com.allancslima.omdbclient.data.db.model.Movie;
 
 /**
@@ -18,8 +20,8 @@ public class NewMoviePresenter implements NewMovieMVP.Presenter {
         mModel = new NewMovieModel(this);
     }
 
-    public Context getContext() {
-        return (Context) mView;
+    public AppCompatActivity getActivity() {
+        return (AppCompatActivity) mView;
     }
 
     @Override
@@ -33,7 +35,10 @@ public class NewMoviePresenter implements NewMovieMVP.Presenter {
 
     @Override
     public void onInsertedMovie() {
-        mView.showToast("O filme foi inserido com sucesso!");
+        getActivity().setResult(AppCompatActivity.RESULT_OK, new Intent());
+        mView.showToast(getActivity()
+                .getResources()
+                .getString(R.string.msg_inserted_movie));
         mView.close();
     }
 

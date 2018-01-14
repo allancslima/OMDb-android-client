@@ -1,6 +1,6 @@
 package com.allancslima.omdbclient.ui.newmovie;
 
-import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
 
 import com.allancslima.omdbclient.data.db.model.Movie;
 
@@ -12,13 +12,13 @@ public interface NewMovieMVP {
 
     interface View {
         public void showToast(String msg);
-        public void setEmptyTitleInputError();
         public void setEnabledAddButton(boolean enabled);
+        public void setEmptyTitleInputError();
         public void close();
     }
 
     interface Presenter {
-        public Context getContext();
+        public AppCompatActivity getActivity();
         public void addMovie(String title);
         public void onInsertedMovie();
         public void onEmptyTitleInputError();

@@ -1,7 +1,9 @@
 package com.allancslima.omdbclient.ui.newmovie;
 
 import android.arch.persistence.room.Room;
+import android.content.Intent;
 
+import com.allancslima.omdbclient.Constants;
 import com.allancslima.omdbclient.R;
 import com.allancslima.omdbclient.data.db.AppDatabase;
 import com.allancslima.omdbclient.data.db.model.Movie;
@@ -42,18 +44,25 @@ public class NewMovieModel implements NewMovieMVP.Model {
                     if (movieResponse.isResponse()) {
                         storeMovie(movieResponse.getMovie());
                     } else {
-                        mPresenter.onError(mPresenter.getContext()
+                        mPresenter.onError(mPresenter.getActivity()
                                 .getResources()
                                 .getString(R.string.msg_movie_not_found));
                     }
-                }, throwable -> mPresenter.onError(mPresenter.getContext()
+                }, throwable -> mPresenter.onError(mPresenter.getActivity()
                         .getResources()
                         .getString(R.string.msg_movie_request_error)));
     }
 
     private void storeMovie(Movie movie) {
-        AppDatabase db = Room
-                .inMemoryDatabaseBuilder(mPresenter.getContext(), AppDatabase.class)
+        AppDatabase database = Room
+                .databaseBuilder(mPresenter.getActivity(), AppDatabase.class, Constants.DATABASE_NAME)
                 .build();
+
+        new Thread(() -> {
+            database.getMovieDao().insert(movie);
+            mPresenter.getActivity().runOnUiThread(() -> {
+                mPresenter.onInsertedMovie();
+            });
+        }).start();
     }
 }

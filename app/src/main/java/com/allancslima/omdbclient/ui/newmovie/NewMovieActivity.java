@@ -53,18 +53,18 @@ public class NewMovieActivity extends AppCompatActivity implements NewMovieMVP.V
 
     @Override
     public void showToast(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setEnabledAddButton(boolean enabled) {
+        buttonAdd.setEnabled(enabled);
     }
 
     @Override
     public void setEmptyTitleInputError() {
         editTitleWrapper.setErrorEnabled(true);
         editTitleWrapper.setError(getResources().getString(R.string.msg_empty_input_error));
-    }
-
-    @Override
-    public void setEnabledAddButton(boolean enabled) {
-        buttonAdd.setEnabled(enabled);
     }
 
     @Override

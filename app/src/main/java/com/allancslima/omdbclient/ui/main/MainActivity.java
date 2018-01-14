@@ -8,21 +8,24 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.allancslima.omdbclient.Constants;
 import com.allancslima.omdbclient.R;
 import com.allancslima.omdbclient.data.db.model.Movie;
 import com.allancslima.omdbclient.ui.newmovie.NewMovieActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainMVP.View {
 
     private RecyclerView mRecyclerView;
+    private MainMVP.Presenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mPresenter = new MainPresenter(this);
 
         mRecyclerView = findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
@@ -30,23 +33,28 @@ public class MainActivity extends AppCompatActivity {
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         mRecyclerView.setLayoutManager(layoutManager);
 
-        MovieAdapter adapter = new MovieAdapter(this, getMovies());
-        mRecyclerView.setAdapter(adapter);
-
         FloatingActionButton btnAddMovie = findViewById(R.id.button_add_movie);
-        btnAddMovie.setOnClickListener((View v) ->
-                startActivity(new Intent(MainActivity.this, NewMovieActivity.class)));
+        btnAddMovie.setOnClickListener((View v) -> {
+            Intent intent = new Intent(MainActivity.this, NewMovieActivity.class);
+            startActivityForResult(intent, Constants.NEW_MOVIE_REQUEST_CODE);
+        });
+
+        mPresenter.loadMovies();
     }
 
-    public List<Movie> getMovies() {
-        List<Movie> movies = new ArrayList<>();
-        for (int i=0; i<10; i++) {
-            Movie m = new Movie();
-            m.setTitle("Justice League");
-            m.setYear("2017");
-            m.setGenre("Action");
-            movies.add(m);
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == Constants.NEW_MOVIE_REQUEST_CODE) {
+            if (resultCode == RESULT_OK)
+                mPresenter.loadMovies();
         }
-        return movies;
+    }
+
+    @Override
+    public void setAdapter(List<Movie> dataset) {
+        MovieAdapter adapter = new MovieAdapter(this, dataset);
+        mRecyclerView.setAdapter(adapter);
     }
 }

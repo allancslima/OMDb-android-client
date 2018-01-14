@@ -10,7 +10,6 @@ import com.allancslima.omdbclient.data.db.model.Movie;
 import java.util.List;
 
 import io.reactivex.Flowable;
-import io.reactivex.Observable;
 
 /**
  * Created by Allan Lima on 12/01/2018.
