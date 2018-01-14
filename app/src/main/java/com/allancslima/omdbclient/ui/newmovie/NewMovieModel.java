@@ -2,6 +2,7 @@ package com.allancslima.omdbclient.ui.newmovie;
 
 import android.arch.persistence.room.Room;
 
+import com.allancslima.omdbclient.R;
 import com.allancslima.omdbclient.data.db.AppDatabase;
 import com.allancslima.omdbclient.data.db.model.Movie;
 import com.allancslima.omdbclient.data.network.OMDbService;
@@ -41,9 +42,13 @@ public class NewMovieModel implements NewMovieMVP.Model {
                     if (movieResponse.isResponse()) {
                         storeMovie(movieResponse.getMovie());
                     } else {
-                        mPresenter.onError("Movie not found!");
+                        mPresenter.onError(mPresenter.getContext()
+                                .getResources()
+                                .getString(R.string.msg_movie_not_found));
                     }
-                }, throwable -> mPresenter.onError("Error!\nDo you have an internet connection?"));
+                }, throwable -> mPresenter.onError(mPresenter.getContext()
+                        .getResources()
+                        .getString(R.string.msg_movie_request_error)));
     }
 
     private void storeMovie(Movie movie) {

@@ -4,4 +4,6 @@
     <string name="label_title">Title</string>
     <string name="action_add">Add</string>
     <string name="msg_empty_input_error">This field must be type!</string>
+    <string name="msg_movie_not_found">Movie not found!</string>
+    <string name="msg_movie_request_error">Error!\n\nDo you have an internet connection?</string>
 </resources>
