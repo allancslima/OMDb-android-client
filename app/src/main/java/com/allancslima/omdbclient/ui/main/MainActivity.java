@@ -10,7 +10,7 @@ import android.view.View;
 
 import com.allancslima.omdbclient.R;
 import com.allancslima.omdbclient.data.db.model.Movie;
-import com.allancslima.omdbclient.ui.addmovie.AddMovieActivity;
+import com.allancslima.omdbclient.ui.newmovie.NewMovieActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         FloatingActionButton btnAddMovie = findViewById(R.id.button_add_movie);
         btnAddMovie.setOnClickListener((View v) ->
-                startActivity(new Intent(MainActivity.this, AddMovieActivity.class)));
+                startActivity(new Intent(MainActivity.this, NewMovieActivity.class)));
     }
 
     public List<Movie> getMovies() {

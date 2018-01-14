@@ -1,4 +1,4 @@
-package com.allancslima.omdbclient.ui.addmovie;
+package com.allancslima.omdbclient.ui.newmovie;
 
 import android.content.Context;
 
@@ -8,14 +8,14 @@ import com.allancslima.omdbclient.data.db.model.Movie;
  * Created by Allan Lima on 11/01/2018.
  */
 
-public class AddMoviePresenter implements AddMovieMVP.Presenter {
+public class NewMoviePresenter implements NewMovieMVP.Presenter {
 
-    private AddMovieMVP.View mView;
-    private AddMovieMVP.Model mModel;
+    private NewMovieMVP.View mView;
+    private NewMovieMVP.Model mModel;
 
-    public AddMoviePresenter(AddMovieMVP.View view) {
+    public NewMoviePresenter(NewMovieMVP.View view) {
         mView = view;
-        mModel = new AddMovieModel(this);
+        mModel = new NewMovieModel(this);
     }
 
     public Context getContext() {
@@ -33,7 +33,7 @@ public class AddMoviePresenter implements AddMovieMVP.Presenter {
 
     @Override
     public void onInsertedMovie() {
-        mView.showToast("The movie was successfully inserted!");
+        mView.showToast("O filme foi inserido com sucesso!");
         mView.close();
     }
 

@@ -1,4 +1,4 @@
-package com.allancslima.omdbclient.ui.addmovie;
+package com.allancslima.omdbclient.ui.newmovie;
 
 import android.content.Context;
 
@@ -8,7 +8,7 @@ import com.allancslima.omdbclient.data.db.model.Movie;
  * Created by Allan Lima on 11/01/2018.
  */
 
-public interface AddMovieMVP {
+public interface NewMovieMVP {
 
     interface View {
         public void showToast(String msg);

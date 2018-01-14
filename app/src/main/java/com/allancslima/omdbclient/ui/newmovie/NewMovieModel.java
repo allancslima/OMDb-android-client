@@ -1,4 +1,4 @@
-package com.allancslima.omdbclient.ui.addmovie;
+package com.allancslima.omdbclient.ui.newmovie;
 
 import android.arch.persistence.room.Room;
 
@@ -14,17 +14,17 @@ import io.reactivex.schedulers.Schedulers;
  * Created by Allan Lima on 11/01/2018.
  */
 
-public class AddMovieModel implements AddMovieMVP.Model {
+public class NewMovieModel implements NewMovieMVP.Model {
 
-    private AddMovieMVP.Presenter mPresenter;
+    private NewMovieMVP.Presenter mPresenter;
 
-    public AddMovieModel(AddMovieMVP.Presenter presenter) {
+    public NewMovieModel(NewMovieMVP.Presenter presenter) {
         mPresenter = presenter;
     }
 
     @Override
     public void insertMovie(Movie movie) {
-        if ( movie.getTitle().trim().isEmpty() )
+        if (movie.getTitle().trim().isEmpty())
             mPresenter.onEmptyTitleInputError();
         else
             requestMovie(movie.getTitle());
@@ -43,7 +43,7 @@ public class AddMovieModel implements AddMovieMVP.Model {
                     } else {
                         mPresenter.onError("Movie not found!");
                     }
-                }, throwable -> mPresenter.onError("You are connected?"));
+                }, throwable -> mPresenter.onError("Error!\nDo you have an internet connection?"));
     }
 
     private void storeMovie(Movie movie) {

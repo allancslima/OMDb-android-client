@@ -1,4 +1,4 @@
-package com.allancslima.omdbclient.ui.addmovie;
+package com.allancslima.omdbclient.ui.newmovie;
 
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
@@ -15,12 +15,12 @@ import com.allancslima.omdbclient.R;
  * Created by Allan Lima on 11/01/2018.
  */
 
-public class AddMovieActivity extends AppCompatActivity implements AddMovieMVP.View {
+public class NewMovieActivity extends AppCompatActivity implements NewMovieMVP.View {
 
     private TextInputLayout editTitleWrapper;
     private TextInputEditText editTitle;
-    AppCompatButton buttonAdd;
-    private AddMovieMVP.Presenter mPresenter;
+    private AppCompatButton buttonAdd;
+    private NewMovieMVP.Presenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +28,7 @@ public class AddMovieActivity extends AppCompatActivity implements AddMovieMVP.V
         setContentView(R.layout.activity_add_movie);
         setTitle(R.string.title_add_movie);
 
-        mPresenter = new AddMoviePresenter(this);
+        mPresenter = new NewMoviePresenter(this);
 
         if (getSupportActionBar() != null)
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -37,8 +37,8 @@ public class AddMovieActivity extends AppCompatActivity implements AddMovieMVP.V
         editTitle = findViewById(R.id.edit_title);
 
         buttonAdd = findViewById(R.id.button_add);
-        buttonAdd.setOnClickListener( (View v) -> mPresenter
-                .addMovie( editTitle.getText().toString() ) );
+        buttonAdd.setOnClickListener((View v) -> mPresenter
+                .addMovie( editTitle.getText().toString() ));
     }
 
     @Override
@@ -53,13 +53,13 @@ public class AddMovieActivity extends AppCompatActivity implements AddMovieMVP.V
 
     @Override
     public void showToast(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void setEmptyTitleInputError() {
         editTitleWrapper.setErrorEnabled(true);
-        editTitleWrapper.setError( getResources().getString(R.string.msg_empty_input_error) );
+        editTitleWrapper.setError(getResources().getString(R.string.msg_empty_input_error));
     }
 
     @Override
