@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.allancslima.omdbclient.Constants;
 import com.allancslima.omdbclient.R;
@@ -20,6 +21,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements MainMVP.View {
 
     private RecyclerView mRecyclerView;
+    private TextView textNoMovies;
     private MovieAdapter mAdapter;
     private MainMVP.Presenter mPresenter;
 
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements MainMVP.View {
 
         mPresenter = new MainPresenter(this);
 
+        textNoMovies = binding.textNoMovies;
         mRecyclerView = binding.recyclerView;
         mRecyclerView.setHasFixedSize(true);
 
@@ -60,5 +63,7 @@ public class MainActivity extends AppCompatActivity implements MainMVP.View {
     public void setAdapterDataset(List<Movie> dataset) {
         mAdapter = new MovieAdapter(this, dataset);
         mRecyclerView.setAdapter(mAdapter);
+
+        textNoMovies.setVisibility(dataset.size() == 0 ? View.VISIBLE : View.GONE);
     }
 }

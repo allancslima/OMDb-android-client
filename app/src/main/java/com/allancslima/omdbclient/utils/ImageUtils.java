@@ -16,8 +16,8 @@ import java.io.IOException;
 
 public class ImageUtils {
 
-    public static void saveToInternalStorage(Context context, Bitmap image,
-                                             long objectId) throws IOException {
+    public static void saveToInternalStorage(Context context, Bitmap image, long objectId)
+            throws IOException {
         ContextWrapper contextWrapper = new ContextWrapper(context);
         File directory = contextWrapper.getDir("images", Context.MODE_PRIVATE);
 
