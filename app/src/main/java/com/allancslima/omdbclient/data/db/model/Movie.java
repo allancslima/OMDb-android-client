@@ -14,7 +14,10 @@ import java.io.Serializable;
 public class Movie implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private long id;
+
+    @ColumnInfo(name = "posterUrl")
+    private String posterUrl;
 
     @ColumnInfo(name = "title")
     private String title;
@@ -37,12 +40,20 @@ public class Movie implements Serializable {
     @ColumnInfo(name = "production")
     private String production;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
+    }
+
+    public String getPosterUrl() {
+        return posterUrl;
+    }
+
+    public void setPosterUrl(String posterUrl) {
+        this.posterUrl = posterUrl;
     }
 
     public String getTitle() {

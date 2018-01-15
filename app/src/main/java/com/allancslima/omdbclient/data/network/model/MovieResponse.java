@@ -11,12 +11,15 @@ import com.google.gson.annotations.SerializedName;
 public class MovieResponse {
 
     @Expose
+    @SerializedName("Poster")
+    private String posterUrl;
+
+    @Expose
     @SerializedName("Title")
     private String title;
 
     @Expose
     @SerializedName("Year")
-    // String type: API can returns "2006-2007" for example
     private String year;
 
     @Expose
@@ -42,6 +45,14 @@ public class MovieResponse {
     @Expose
     @SerializedName("Response")
     private boolean response;
+
+    public String getPosterUrl() {
+        return posterUrl;
+    }
+
+    public void setPosterUrl(String posterUrl) {
+        this.posterUrl = posterUrl;
+    }
 
     public String getTitle() {
         return title;
@@ -109,6 +120,7 @@ public class MovieResponse {
 
     public Movie getMovie() {
         Movie movie = new Movie();
+        movie.setPosterUrl(getPosterUrl());
         movie.setTitle(getTitle());
         movie.setYear(getYear());
         movie.setGenre(getGenre());

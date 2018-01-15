@@ -22,7 +22,7 @@ public interface MovieDao {
     Flowable<List<Movie>> findAll();
 
     @Insert
-    void insert(Movie movie);
+    long insert(Movie movie);
 
     @Delete
     void delete(Movie movie);

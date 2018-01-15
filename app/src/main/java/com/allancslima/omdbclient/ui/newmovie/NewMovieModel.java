@@ -1,9 +1,16 @@
 package com.allancslima.omdbclient.ui.newmovie;
 
+import android.graphics.Bitmap;
+
 import com.allancslima.omdbclient.R;
 import com.allancslima.omdbclient.data.DataFactory;
+import com.allancslima.omdbclient.data.db.AppDatabase;
 import com.allancslima.omdbclient.data.db.model.Movie;
 import com.allancslima.omdbclient.data.network.OMDbService;
+import com.allancslima.omdbclient.utils.ImageUtils;
+import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -49,12 +56,30 @@ public class NewMovieModel implements NewMovieMVP.Model {
 
     private void storeMovie(Movie movie) {
         new Thread(() -> {
-            DataFactory.provideDatabase(mPresenter.getActivity())
+            final long insertedMovieId = DataFactory
+                    .provideDatabase(mPresenter.getActivity())
                     .getMovieDao()
                     .insert(movie);
+
+            saveMoviePoster(movie.getPosterUrl(), insertedMovieId);
 
             mPresenter.getActivity()
                     .runOnUiThread(() -> mPresenter.onInsertedMovie());
         }).start();
+    }
+
+    private void saveMoviePoster(String posterUrl, long objectId) {
+        try {
+            Bitmap poster = Picasso.with(mPresenter.getActivity())
+                    .load(posterUrl)
+                    .get();
+
+            ImageUtils.saveToInternalStorage(mPresenter.getActivity(), poster, objectId);
+        } catch (IOException e) {
+            e.printStackTrace();
+            mPresenter.onError(mPresenter.getActivity()
+                    .getResources()
+                    .getString(R.string.msg_poster_rescue_error));
+        }
     }
 }
