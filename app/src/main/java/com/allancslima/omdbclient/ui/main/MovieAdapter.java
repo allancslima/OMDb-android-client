@@ -32,6 +32,9 @@ public class MovieAdapter extends BaseAdapter {
 
         view.setOnClickListener((View v) -> {
             Intent intent = new Intent(mContext, MovieDetailsActivity.class);
+            Movie movie = (Movie) getItem(holder.getAdapterPosition());
+
+            intent.putExtra("movie", movie);
             mContext.startActivity(intent);
         });
 

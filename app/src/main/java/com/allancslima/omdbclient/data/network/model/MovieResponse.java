@@ -24,6 +24,22 @@ public class MovieResponse {
     private String genre;
 
     @Expose
+    @SerializedName("Actors")
+    private String actors;
+
+    @Expose
+    @SerializedName("imdbRating")
+    private String imdbRating;
+
+    @Expose
+    @SerializedName("imdbVotes")
+    private String imdbVotes;
+
+    @Expose
+    @SerializedName("Production")
+    private String production;
+
+    @Expose
     @SerializedName("Response")
     private boolean response;
 
@@ -59,11 +75,47 @@ public class MovieResponse {
         this.response = response;
     }
 
+    public String getActors() {
+        return actors;
+    }
+
+    public void setActors(String actors) {
+        this.actors = actors;
+    }
+
+    public String getImdbRating() {
+        return imdbRating;
+    }
+
+    public void setImdbRating(String imdbRating) {
+        this.imdbRating = imdbRating;
+    }
+
+    public String getImdbVotes() {
+        return imdbVotes;
+    }
+
+    public void setImdbVotes(String imdbVotes) {
+        this.imdbVotes = imdbVotes;
+    }
+
+    public String getProduction() {
+        return production;
+    }
+
+    public void setProduction(String production) {
+        this.production = production;
+    }
+
     public Movie getMovie() {
         Movie movie = new Movie();
         movie.setTitle(getTitle());
         movie.setYear(getYear());
         movie.setGenre(getGenre());
+        movie.setActors(getActors());
+        movie.setImdbRating(getImdbRating());
+        movie.setImdbVotes(getImdbVotes());
+        movie.setProduction(getProduction());
 
         return movie;
     }

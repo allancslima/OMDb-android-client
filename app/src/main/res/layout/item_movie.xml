@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="180dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/poster_justice_league" />
+            android:src="@drawable/poster_example" />
 
         <TextView
             android:id="@+id/text_title"

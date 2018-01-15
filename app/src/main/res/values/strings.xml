@@ -7,4 +7,10 @@
     <string name="msg_empty_input_error">This field must be completed!</string>
     <string name="msg_movie_not_found">Movie not found!</string>
     <string name="msg_movie_request_error">Error!\n\nDo you have an internet connection?</string>
+    <string name="label_genre">Genre:</string>
+    <string name="label_year">Year:</string>
+    <string name="label_actors">Actors:</string>
+    <string name="label_imdb_rating">IMDb:</string>
+    <string name="label_votes">votes</string>
+    <string name="label_production">Production:</string>
 </resources>
