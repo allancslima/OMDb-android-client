@@ -6,27 +6,29 @@ import android.support.v7.app.AppCompatActivity;
 import com.allancslima.omdbclient.R;
 import com.allancslima.omdbclient.data.db.model.Movie;
 
+import java.lang.ref.WeakReference;
+
 /**
  * Created by Allan Lima on 11/01/2018.
  */
 
 public class NewMoviePresenter implements NewMovieMVP.Presenter {
 
-    private NewMovieMVP.View mView;
+    private WeakReference<NewMovieMVP.View> mView;
     private NewMovieMVP.Model mModel;
 
     public NewMoviePresenter(NewMovieMVP.View view) {
-        mView = view;
+        mView = new WeakReference<>(view);
         mModel = new NewMovieModel(this);
     }
 
     public AppCompatActivity getActivity() {
-        return (AppCompatActivity) mView;
+        return (AppCompatActivity) mView.get();
     }
 
     @Override
     public void addMovie(String title) {
-        mView.setEnabledAddButton(false);
+        mView.get().setEnabledAddButton(false);
 
         Movie movie = new Movie();
         movie.setTitle(title);
@@ -36,21 +38,21 @@ public class NewMoviePresenter implements NewMovieMVP.Presenter {
     @Override
     public void onInsertedMovie() {
         getActivity().setResult(AppCompatActivity.RESULT_OK, new Intent());
-        mView.showToast(getActivity()
+        mView.get().showToast(getActivity()
                 .getResources()
                 .getString(R.string.msg_inserted_movie));
-        mView.close();
+        mView.get().close();
     }
 
     @Override
     public void onEmptyTitleInputError() {
-        mView.setEmptyTitleInputError();
-        mView.setEnabledAddButton(true);
+        mView.get().setEmptyTitleInputError();
+        mView.get().setEnabledAddButton(true);
     }
 
     @Override
     public void onError(String errorMsg) {
-        mView.showToast(errorMsg);
-        mView.setEnabledAddButton(true);
+        mView.get().showToast(errorMsg);
+        mView.get().setEnabledAddButton(true);
     }
 }

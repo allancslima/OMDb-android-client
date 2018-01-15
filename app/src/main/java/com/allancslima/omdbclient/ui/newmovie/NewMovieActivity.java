@@ -1,5 +1,6 @@
 package com.allancslima.omdbclient.ui.newmovie;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.allancslima.omdbclient.R;
+import com.allancslima.omdbclient.databinding.ActivityNewMovieBinding;
 
 /**
  * Created by Allan Lima on 11/01/2018.
@@ -25,18 +27,19 @@ public class NewMovieActivity extends AppCompatActivity implements NewMovieMVP.V
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_movie);
-        setTitle(R.string.title_add_movie);
+        ActivityNewMovieBinding binding = DataBindingUtil
+                .setContentView(this, R.layout.activity_new_movie);
 
         mPresenter = new NewMoviePresenter(this);
 
+        setTitle(R.string.title_add_movie);
         if (getSupportActionBar() != null)
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        editTitleWrapper = findViewById(R.id.edit_title_wrapper);
-        editTitle = findViewById(R.id.edit_title);
+        editTitleWrapper = binding.editTitleWrapper;
+        editTitle = binding.editTitle;
 
-        buttonAdd = findViewById(R.id.button_add);
+        buttonAdd = binding.buttonAdd;
         buttonAdd.setOnClickListener((View v) -> mPresenter
                 .addMovie( editTitle.getText().toString() ));
     }

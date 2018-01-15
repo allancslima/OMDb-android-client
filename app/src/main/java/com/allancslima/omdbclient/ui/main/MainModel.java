@@ -1,10 +1,6 @@
 package com.allancslima.omdbclient.ui.main;
 
-import android.arch.persistence.room.Room;
-import android.util.Log;
-
-import com.allancslima.omdbclient.Constants;
-import com.allancslima.omdbclient.data.db.AppDatabase;
+import com.allancslima.omdbclient.data.DataFactory;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -23,11 +19,8 @@ public class MainModel implements MainMVP.Model {
 
     @Override
     public void getStoredMovies() {
-        AppDatabase database = Room
-                .databaseBuilder(mPresenter.getActivity(), AppDatabase.class, Constants.DATABASE_NAME)
-                .build();
-
-        database.getMovieDao().findAll()
+        DataFactory.provideDatabase(mPresenter.getActivity())
+                .getMovieDao().findAll()
                 .observeOn(Schedulers.newThread())
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .subscribe(movies -> mPresenter.getActivity()

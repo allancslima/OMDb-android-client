@@ -1,6 +1,5 @@
 package com.allancslima.omdbclient.ui.main;
 
-import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 
 import com.allancslima.omdbclient.data.db.model.Movie;
@@ -14,7 +13,7 @@ import java.util.List;
 public interface MainMVP {
 
     interface View {
-        public void setAdapter(List<Movie> dataset);
+        public void setAdapterDataset(List<Movie> dataset);
     }
 
     interface Presenter {

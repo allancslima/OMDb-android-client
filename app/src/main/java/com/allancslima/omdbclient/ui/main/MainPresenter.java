@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.allancslima.omdbclient.data.db.model.Movie;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 /**
@@ -12,17 +13,17 @@ import java.util.List;
 
 public class MainPresenter implements MainMVP.Presenter {
 
-    private MainMVP.View mView;
+    private WeakReference<MainMVP.View> mView;
     private MainMVP.Model mModel;
 
     public MainPresenter(MainMVP.View view) {
-        mView = view;
+        mView = new WeakReference<>(view);
         mModel = new MainModel(this);
     }
 
     @Override
     public AppCompatActivity getActivity() {
-        return (AppCompatActivity) mView;
+        return (AppCompatActivity) mView.get();
     }
 
     @Override
@@ -32,6 +33,6 @@ public class MainPresenter implements MainMVP.Presenter {
 
     @Override
     public void onGotMovies(List<Movie> movies) {
-        mView.setAdapter(movies);
+        mView.get().setAdapterDataset(movies);
     }
 }
